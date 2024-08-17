@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Domain.Customer.Exceptions;
-using Domain.Customer;
 
 namespace Application.Customers.GetById
 {
