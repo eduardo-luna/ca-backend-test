@@ -23,7 +23,7 @@ namespace Application.Customers.Create
                 throw new CustomerValidationException(errors);
             }
 
-            if(await _customerRepository.CustomerAlreadyExistsAsync(request.Email))
+            if(await _customerRepository.CustomerAlreadyExistsAsync(request.Email.Trim().ToLower()))
             {
                 throw new CustomerAlreadyExistsException(request.Email);
             }
@@ -31,7 +31,7 @@ namespace Application.Customers.Create
             var customer = new Customer
             {
                 Name = request.Name,
-                Email = request.Email,
+                Email = request.Email.Trim().ToLower(),
                 Address = request.Address
             };
 
