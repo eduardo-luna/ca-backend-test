@@ -6,6 +6,7 @@ namespace Application.Customers
     {
         void Add(Customer customer);
         void Update(Customer customer);
+        void Delete(Customer customer);
         Task<bool> CustomerAlreadyExistsAsync(string email);
         Task<Customer?> GetByIdAsync(int id);
     }

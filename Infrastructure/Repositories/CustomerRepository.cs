@@ -23,6 +23,11 @@ namespace Infrastructure.Repositories
             return _context.Customers.AnyAsync(x => x.Email == email);
         }
 
+        public void Delete(Customer id)
+        {
+            _context.Remove(id);
+        }
+
         public Task<Customer?> GetByIdAsync(int id)
         {
             return _context.Customers.FirstOrDefaultAsync(x => x.Id == id);

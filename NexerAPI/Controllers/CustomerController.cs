@@ -1,4 +1,5 @@
 ﻿using Application.Customers.Create;
+using Application.Customers.Delete;
 using Application.Customers.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace NexerAPI.Controllers
         public async Task<IActionResult> Post([FromBody] CreateCustomerCommand command, ISender sender)
         {
             await sender.Send(command);
-            return Created();
+            return Ok();
         }
 
         // PUT api/<CustomerController>/5
@@ -25,6 +26,14 @@ namespace NexerAPI.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] UpdateCustomerRequest request, ISender sender)
         {
             var command = new UpdateCustomerCommand(id, request.Name, request.Email, request.Address);
+            await sender.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id, ISender sender)
+        {
+            var command = new DeleteCustomerCommand(id);
             await sender.Send(command);
             return NoContent();
         }
