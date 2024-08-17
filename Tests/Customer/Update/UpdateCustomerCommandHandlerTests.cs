@@ -114,7 +114,7 @@ namespace Tests.Customer.Update
         }
 
         [Fact]
-        public async Task Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
+        public void Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
         {
             //Arrange
             var command = new UpdateCustomerCommand(1, "Eduardo", "Eduardo@Nexer.com", "Rua 1, N 2");

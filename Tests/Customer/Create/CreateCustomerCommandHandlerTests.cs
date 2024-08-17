@@ -80,7 +80,7 @@ namespace Tests.Customer.Create
         }
 
         [Fact]
-        public async Task Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
+        public void Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
         {
             //Arrange
             var command = new CreateCustomerCommand("Eduardo", "Eduardo@Nexer.com", "Rua 1, N 2");
