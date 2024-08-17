@@ -28,6 +28,11 @@ namespace Infrastructure.Repositories
             _context.Remove(id);
         }
 
+        public Task<List<Customer>> GetAllAsync()
+        {
+            return _context.Customers.ToListAsync();
+        }
+
         public Task<Customer?> GetByIdAsync(int id)
         {
             return _context.Customers.FirstOrDefaultAsync(x => x.Id == id);

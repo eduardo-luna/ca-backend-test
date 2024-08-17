@@ -1,5 +1,8 @@
-﻿using Application.Customers.Create;
+﻿using Application.Customers;
+using Application.Customers.Create;
 using Application.Customers.Delete;
+using Application.Customers.GetById;
+using Application.Customers.GetAll;
 using Application.Customers.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +39,19 @@ namespace NexerAPI.Controllers
             var command = new DeleteCustomerCommand(id);
             await sender.Send(command);
             return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<CustomerDto> Get(int id, ISender sender)
+        {
+            var query = new GetCustomerByIdQuery(id);
+            return await sender.Send(query);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<CustomerDto>> GetAll(ISender sender)
+        {
+            return await sender.Send(new GetAllCustomersQuery());
         }
     }
 }

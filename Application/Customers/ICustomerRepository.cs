@@ -9,5 +9,6 @@ namespace Application.Customers
         void Delete(Customer customer);
         Task<bool> CustomerAlreadyExistsAsync(string email);
         Task<Customer?> GetByIdAsync(int id);
+        Task<List<Customer>> GetAllAsync();
     }
 }
