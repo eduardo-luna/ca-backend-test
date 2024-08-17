@@ -18,9 +18,19 @@ namespace Infrastructure.Repositories
             _context.Add(customer);
         }
 
-        public async Task<bool> CustomerAlreadyExistsAsync(string email)
+        public Task<bool> CustomerAlreadyExistsAsync(string email)
         {
-            return await _context.Customers.AnyAsync(x => x.Email == email);
+            return _context.Customers.AnyAsync(x => x.Email == email);
+        }
+
+        public Task<Customer?> GetByIdAsync(int id)
+        {
+            return _context.Customers.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public void Update(Customer customer)
+        {
+            _context.Update(customer);
         }
     }
 }

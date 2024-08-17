@@ -1,4 +1,5 @@
 ﻿using Application.Customers.Create;
+using Application.Customers.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,5 +20,13 @@ namespace NexerAPI.Controllers
             return Created();
         }
 
+        // PUT api/<CustomerController>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateCustomerRequest request, ISender sender)
+        {
+            var command = new UpdateCustomerCommand(id, request.Name, request.Email, request.Address);
+            await sender.Send(command);
+            return NoContent();
+        }
     }
 }
