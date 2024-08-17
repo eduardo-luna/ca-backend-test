@@ -4,6 +4,6 @@ namespace Domain.Product.Exceptions
 {
     public sealed class ProductNotFoundException : NotFoundException
     {
-        public ProductNotFoundException(string message) : base(message) { }
+        public ProductNotFoundException(int id) : base($"product with id {id} does not exists") { }
     }
 }

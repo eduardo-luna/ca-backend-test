@@ -18,9 +18,19 @@ namespace Infrastructure.Repositories
             _context.Add(product);
         }
 
+        public Task<Product?> GetByIdAsync(int id)
+        {
+            return _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public Task<bool> ProductExistsAsync(string name)
         {
             return _context.Products.AnyAsync(x => x.Name.ToLower().Equals(name.ToLower()));
+        }
+
+        public void Update(Product product)
+        {
+            _context.Update(product);
         }
     }
 }
