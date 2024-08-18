@@ -1,6 +1,7 @@
 ﻿using Application.Products;
 using Application.Products.Create;
 using Application.Products.Delete;
+using Application.Products.GetAll;
 using Application.Products.GetById;
 using Application.Products.Update;
 using MediatR;
@@ -43,6 +44,12 @@ namespace NexerAPI.Controllers
         public async Task<ProductDto> Get(int id, ISender sender)
         {
             return await sender.Send(new GetProductByIdQuery(id));
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<ProductDto>> GetAll(ISender sender)
+        {
+            return await sender.Send(new GetAllProductsQuery());
         }
     }
 }

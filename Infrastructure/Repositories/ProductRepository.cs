@@ -23,6 +23,11 @@ namespace Infrastructure.Repositories
             _context.Remove(product);
         }
 
+        public Task<List<Product>> GetAllAsync()
+        {
+            return _context.Products.ToListAsync();
+        }
+
         public Task<Product?> GetByIdAsync(int id)
         {
             return _context.Products.FirstOrDefaultAsync(x => x.Id == id);
