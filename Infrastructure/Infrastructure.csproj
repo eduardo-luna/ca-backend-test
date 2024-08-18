@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="External\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
