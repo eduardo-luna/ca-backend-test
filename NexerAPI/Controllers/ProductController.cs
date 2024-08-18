@@ -1,4 +1,7 @@
-﻿using Application.Products.Create;
+﻿using Application.Products;
+using Application.Products.Create;
+using Application.Products.Delete;
+using Application.Products.GetById;
 using Application.Products.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +29,14 @@ namespace NexerAPI.Controllers
         {
             var command = new UpdateProductCommand(id, request.Name);
             await sender.Send(command);
-            return Ok();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id, ISender sender)
+        {
+            await sender.Send(new DeleteProductCommand(id));
+            return NoContent();
         }
     }
 }

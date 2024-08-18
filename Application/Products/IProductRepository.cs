@@ -6,6 +6,7 @@ namespace Application.Products
     {
         void Add(Product product);
         void Update(Product product);
+        void Delete(Product product);
         Task<bool> ProductExistsAsync(string name);
         Task<Product?> GetByIdAsync(int id);
     }
