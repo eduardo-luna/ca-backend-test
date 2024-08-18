@@ -38,5 +38,11 @@ namespace NexerAPI.Controllers
             await sender.Send(new DeleteProductCommand(id));
             return NoContent();
         }
+
+        [HttpGet("{id}")]
+        public async Task<ProductDto> Get(int id, ISender sender)
+        {
+            return await sender.Send(new GetProductByIdQuery(id));
+        }
     }
 }
