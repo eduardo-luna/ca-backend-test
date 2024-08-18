@@ -28,7 +28,7 @@ namespace Application.Products.Create
                 throw new ProductAlreadyExistsException(request.Name);
             }
 
-            var product = new Product { Name = request.Name };
+            var product = new Product { Id = Guid.NewGuid(), Name = request.Name };
 
             _productRepository.Add(product);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

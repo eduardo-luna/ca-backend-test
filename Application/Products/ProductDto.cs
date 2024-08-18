@@ -1,4 +1,4 @@
 ﻿namespace Application.Products
 {
-    public record ProductDto(int Id, string Name);
+    public record ProductDto(Guid Id, string Name);
 }

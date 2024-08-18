@@ -28,7 +28,7 @@ namespace Infrastructure.Repositories
             return _context.Products.ToListAsync();
         }
 
-        public Task<Product?> GetByIdAsync(int id)
+        public Task<Product?> GetByIdAsync(Guid id)
         {
             return _context.Products.FirstOrDefaultAsync(x => x.Id == id);
         }

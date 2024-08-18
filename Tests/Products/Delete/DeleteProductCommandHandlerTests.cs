@@ -22,9 +22,9 @@ namespace Tests.Products.Delete
         public async Task Handle_Should_ThrowNotFoundException_WhenProductDoesntExistsInDatabase()
         {
             //Arrange
-            var command = new DeleteProductCommand(1);
+            var command = new DeleteProductCommand(Guid.NewGuid());
 
-            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(value: null);
+            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(value: null);
 
             var handler = new DeleteProductCommandHandler(_productRepositoryMock.Object, _unitOfWorkMock.Object);
 
@@ -39,10 +39,11 @@ namespace Tests.Products.Delete
         public void Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
         {
             //Arrange
-            var command = new DeleteProductCommand(1);
-            var product = new Product { Id = 1, Name = "ProdutoUm" };
+            var guid = Guid.NewGuid();
+            var command = new DeleteProductCommand(guid);
+            var product = new Product { Id = guid, Name = "ProdutoUm" };
 
-            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(product);
+            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
 
             var handler = new DeleteProductCommandHandler(_productRepositoryMock.Object, _unitOfWorkMock.Object);
 

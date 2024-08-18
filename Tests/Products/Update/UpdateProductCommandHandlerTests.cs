@@ -19,25 +19,10 @@ namespace Tests.Products.Update
         }
 
         [Fact]
-        public async Task Handle_Should_ThrowValidationException_WhenIdIsInvalid()
-        {
-            //Arrange
-            var command = new UpdateProductCommand(0, "ProdutoUm");
-
-            var handler = new UpdateProductCommandHandler(_productRepositoryMock.Object, _unitOfWorkMock.Object);
-
-            //Act
-
-
-            //Act & Assert
-            await Assert.ThrowsAsync<ProductValidationException>(() => handler.Handle(command, default));
-        }
-
-        [Fact]
         public async Task Handle_Should_ThrowValidationException_WhenNameIsNullOrEmpty()
         {
             //Arrange
-            var command = new UpdateProductCommand(1, "");
+            var command = new UpdateProductCommand(Guid.NewGuid(), "");
 
             var handler = new UpdateProductCommandHandler(_productRepositoryMock.Object, _unitOfWorkMock.Object);
 
@@ -52,9 +37,9 @@ namespace Tests.Products.Update
         public async Task Handle_Should_ThrowNotFoundException_WhenProductDoesntExistsInDatabase()
         {
             //Arrange
-            var command = new UpdateProductCommand(1, "Eduardo");
+            var command = new UpdateProductCommand(Guid.NewGuid(), "Eduardo");
 
-            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(value: null);
+            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(value: null);
 
             var handler = new UpdateProductCommandHandler(_productRepositoryMock.Object, _unitOfWorkMock.Object);
 
@@ -69,10 +54,11 @@ namespace Tests.Products.Update
         public async Task Handle_Should_ThrowAlreadyExistsException_WhenProductNameExistsInDatabase()
         {
             //Arrange
-            var command = new UpdateProductCommand(1, "ProdutoDois");
-            var product = new Product { Id = 1, Name = "ProdutoUm" };
+            var guid = Guid.NewGuid();
+            var command = new UpdateProductCommand(guid, "ProdutoDois");
+            var product = new Product { Id = guid, Name = "ProdutoUm" };
 
-            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(product);
+            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
             _productRepositoryMock.Setup(x => x.ProductExistsAsync(It.IsAny<string>())).ReturnsAsync(true);
 
             var handler = new UpdateProductCommandHandler(_productRepositoryMock.Object, _unitOfWorkMock.Object);
@@ -88,10 +74,11 @@ namespace Tests.Products.Update
         public void Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
         {
             //Arrange
-            var command = new UpdateProductCommand(1, "ProdutoUm");
-            var product = new Product { Id = 1, Name = "ProdutoDois" };
+            var guid = Guid.NewGuid();
+            var command = new UpdateProductCommand(guid, "ProdutoUm");
+            var product = new Product { Id = guid, Name = "ProdutoDois" };
 
-            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(product);
+            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
             _productRepositoryMock.Setup(x => x.ProductExistsAsync(It.IsAny<string>())).ReturnsAsync(false);
 
             var handler = new UpdateProductCommandHandler(_productRepositoryMock.Object, _unitOfWorkMock.Object);

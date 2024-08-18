@@ -2,5 +2,5 @@
 
 namespace Application.Products.GetById
 {
-    public record GetProductByIdQuery(int Id) : IRequest<ProductDto>;
+    public record GetProductByIdQuery(Guid Id) : IRequest<ProductDto>;
 }

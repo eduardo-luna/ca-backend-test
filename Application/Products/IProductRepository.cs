@@ -8,7 +8,7 @@ namespace Application.Products
         void Update(Product product);
         void Delete(Product product);
         Task<bool> ProductExistsAsync(string name);
-        Task<Product?> GetByIdAsync(int id);
+        Task<Product?> GetByIdAsync(Guid id);
         Task<List<Product>> GetAllAsync();
     }
 }

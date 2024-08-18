@@ -19,9 +19,9 @@ namespace Tests.Products.GetById
         public async Task Handle_Should_ThrowNotFoundException_WhenProductDoesntExistsInDatabase()
         {
             //Arrange
-            var command = new GetProductByIdQuery(1);
+            var command = new GetProductByIdQuery(Guid.NewGuid());
 
-            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(value: null);
+            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(value: null);
 
             var handler = new GetProductByIdQueryHandler(_productRepositoryMock.Object);
 
@@ -37,10 +37,11 @@ namespace Tests.Products.GetById
         public void Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
         {
             //Arrange
-            var command = new GetProductByIdQuery(1);
-            var product = new Product { Id = 1, Name = "ProdutoUm" };
+            var guid = Guid.NewGuid();
+            var command = new GetProductByIdQuery(guid);
+            var product = new Product { Id = guid, Name = "ProdutoUm" };
 
-            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(product);
+            _productRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(product);
 
             var handler = new GetProductByIdQueryHandler(_productRepositoryMock.Object);
 

@@ -43,11 +43,6 @@ namespace Application.Products.Update
         {
             List<string> errors = [];
 
-            if(product.Id == null || product.Id <= 0)
-            {
-                errors.Add("Product id is invalid");
-            }
-
             if (string.IsNullOrEmpty(product.Name))
             {
                 errors.Add("Product name cannot be null or empty");
