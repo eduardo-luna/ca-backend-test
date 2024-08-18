@@ -11,7 +11,7 @@ namespace Infrastructure
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Billing> Billing { get; set; }
-        public DbSet<BillingLines> BillingLines { get; set; }
+        public DbSet<BillingLine> BillingLines { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
