@@ -18,9 +18,9 @@ namespace Tests.Customer.GetById
         public async Task Handle_Should_ThrowNotFoundException_WhenCustomerDoesntExistsInDatabase()
         {
             //Arrange
-            var command = new GetCustomerByIdQuery(1);
+            var command = new GetCustomerByIdQuery(Guid.NewGuid());
 
-            _customerRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(value: null);
+            _customerRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(value: null);
 
             var handler = new GetCustomerByIdQueryHandler(_customerRepositoryMock.Object);
 
@@ -36,10 +36,11 @@ namespace Tests.Customer.GetById
         public void Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
         {
             //Arrange
-            var command = new GetCustomerByIdQuery(1);
-            var customer = new Domain.Customer.Customer { Id = 1, Name = "Eduardo", Email = "Eduardo@Nexer.com", Address = "Rua 1, n 2" };
+            var guid = Guid.NewGuid();
+            var command = new GetCustomerByIdQuery(guid);
+            var customer = new Domain.Customer.Customer { Id = guid, Name = "Eduardo", Email = "Eduardo@Nexer.com", Address = "Rua 1, n 2" };
 
-            _customerRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(customer);
+            _customerRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(customer);
 
             var handler = new GetCustomerByIdQueryHandler(_customerRepositoryMock.Object);
 

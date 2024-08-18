@@ -30,6 +30,7 @@ namespace Application.Customers.Create
 
             var customer = new Customer
             {
+                Id = Guid.NewGuid(),
                 Name = request.Name,
                 Email = request.Email.Trim().ToLower(),
                 Address = request.Address

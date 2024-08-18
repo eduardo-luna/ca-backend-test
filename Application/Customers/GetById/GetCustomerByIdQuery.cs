@@ -2,5 +2,5 @@
 
 namespace Application.Customers.GetById
 {
-    public record GetCustomerByIdQuery(int Id) : IRequest<CustomerDto>;
+    public record GetCustomerByIdQuery(Guid Id) : IRequest<CustomerDto>;
 }

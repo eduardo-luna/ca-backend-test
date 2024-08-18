@@ -2,5 +2,5 @@
 
 namespace Application.Customers.Update
 {
-    public record UpdateCustomerCommand(int Id, string Name, string Email, string Address) : IRequest;
+    public record UpdateCustomerCommand(Guid Id, string Name, string Email, string Address) : IRequest;
 }

@@ -4,6 +4,6 @@ namespace Domain.Customer.Exceptions
 {
     public sealed class CustomerNotFoundException : NotFoundException
     {
-        public CustomerNotFoundException(int id) : base($"customer with id {id} was not found") { }
+        public CustomerNotFoundException(Guid id) : base($"customer with id {id} was not found") { }
     }
 }

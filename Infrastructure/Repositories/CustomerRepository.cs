@@ -23,9 +23,9 @@ namespace Infrastructure.Repositories
             return _context.Customers.AnyAsync(x => x.Email == email);
         }
 
-        public void Delete(Customer id)
+        public void Delete(Customer customer)
         {
-            _context.Remove(id);
+            _context.Remove(customer);
         }
 
         public Task<List<Customer>> GetAllAsync()
@@ -33,7 +33,7 @@ namespace Infrastructure.Repositories
             return _context.Customers.ToListAsync();
         }
 
-        public Task<Customer?> GetByIdAsync(int id)
+        public Task<Customer?> GetByIdAsync(Guid id)
         {
             return _context.Customers.FirstOrDefaultAsync(x => x.Id == id);
         }

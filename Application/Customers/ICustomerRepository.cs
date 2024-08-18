@@ -8,7 +8,7 @@ namespace Application.Customers
         void Update(Customer customer);
         void Delete(Customer customer);
         Task<bool> CustomerAlreadyExistsAsync(string email);
-        Task<Customer?> GetByIdAsync(int id);
+        Task<Customer?> GetByIdAsync(Guid id);
         Task<List<Customer>> GetAllAsync();
     }
 }

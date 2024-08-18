@@ -21,7 +21,7 @@ namespace NexerAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] UpdateCustomerRequest request, ISender sender)
+        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateCustomerRequest request, ISender sender)
         {
             var command = new UpdateCustomerCommand(id, request.Name, request.Email, request.Address);
             await sender.Send(command);
@@ -29,7 +29,7 @@ namespace NexerAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id, ISender sender)
+        public async Task<IActionResult> Delete(Guid id, ISender sender)
         {
             var command = new DeleteCustomerCommand(id);
             await sender.Send(command);
@@ -37,7 +37,7 @@ namespace NexerAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<CustomerDto> Get(int id, ISender sender)
+        public async Task<CustomerDto> Get(Guid id, ISender sender)
         {
             var query = new GetCustomerByIdQuery(id);
             return await sender.Send(query);

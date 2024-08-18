@@ -47,11 +47,6 @@ namespace Application.Customers.Update
         {
             List<string> errors = [];
 
-            if(customer.Id == null || customer.Id <= 0)
-            {
-                errors.Add("Invalid customer id");
-            }
-
             if (string.IsNullOrEmpty(customer.Name))
             {
                 errors.Add("Name cannot be null or empty");

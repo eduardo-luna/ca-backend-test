@@ -21,9 +21,9 @@ public class DeleteCustomerCommandHandlerTests
     public async Task Handle_Should_ThrowNotFoundException_WhenCustomerDoesntExistsInDatabase()
     {
         //Arrange
-        var command = new DeleteCustomerCommand(1);
+        var command = new DeleteCustomerCommand(Guid.NewGuid());
 
-        _customerRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(value: null);
+        _customerRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(value: null);
 
         var handler = new DeleteCustomerCommandHandler(_customerRepositoryMock.Object, _unitOfWorkMock.Object);
 
@@ -38,10 +38,11 @@ public class DeleteCustomerCommandHandlerTests
     public void Handle_Should_ReturnSuccess_WhenAllCriteriasAreMet()
     {
         //Arrange
-        var command = new DeleteCustomerCommand(1);
-        var customer = new Domain.Customer.Customer { Id = 1, Name = "Eduardo", Email = "EduardoLuna@Nexer.com", Address = "Rua 1, n 2" };
+        var guid = Guid.NewGuid();  
+        var command = new DeleteCustomerCommand(guid);
+        var customer = new Domain.Customer.Customer { Id = guid, Name = "Eduardo", Email = "EduardoLuna@Nexer.com", Address = "Rua 1, n 2" };
 
-        _customerRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(customer);
+        _customerRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<Guid>())).ReturnsAsync(customer);
 
         var handler = new DeleteCustomerCommandHandler(_customerRepositoryMock.Object, _unitOfWorkMock.Object);
 
