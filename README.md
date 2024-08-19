@@ -14,15 +14,17 @@ API REST para gerenciar faturamento de clientes.
 
 ---------------------
 **Configuração do projeto**
-*Docker compose*
+
+***Docker compose***
+
 Há uma configuração de Docker Compose que pode ser iniciada diretamente no visual studio. Essa opção irá configurar o projeto e uma instância do postgres automaticamente.
 Para utilizar essa opção, certifique-se de ter o docker engine rodando e que as portas 8080, 8081 e 5432 estão disponíveis no seu ambiente. Caso não estejam, você pode alterar as portas de saída em: *ca-backend-test\docker-compose.yml*
 
-*Diretamente no visual studio*
-Certifique-se de ter uma instância de postgres disponível
-Configure a conexão de acordo com a sua instância de postgres em *\ca-backend-test\NexerAPI\appsettings.json*
+***Diretamente no visual studio***
 
+Certifique-se de ter uma instância de postgres disponível. Configure a conexão de acordo com a sua instância de postgres em *\ca-backend-test\NexerAPI\appsettings.json*
 
+---------------------
 **Endpoints**
 
 Swagger disponível em /swagger-ui/index.html
