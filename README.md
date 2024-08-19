@@ -1,56 +1,45 @@
 **Teste para vaga de Desenvolvimento Back-end .NET**
 ---------------------
-Criar uma API REST para gerenciar faturamento de clientes.
+API REST para gerenciar faturamento de clientes.
 ---------------------
-**Funcionalidades 🛠️**
 
-* Customer: CRUD; Criar um cadastro do cliente com os seguintes campos:
-    * Id;
-    * Name;
-    * Email;
-    * Address;
-    * **Todos os campos são de preenchimento obrigatório.**
-* Produtos: CRUD; Criar um cadastro de produtos com os seguintes campos:
-    * Id;
-    * Nome do produto;
-    * **Todos os campos são de preenchimento obrigatório.**
-* Controle de conferência e importação de billing.
-    * Utilizar postman para consulta dos dados da API’s para criação das tabelas de billing e billingLines.
-	  * Após consulta, e criação do passo anterior, inserir no banco de dados o primeiro registro do retorno da API de billing para criação de cliente e produto através do swagger ou dataseed.
+**Tecnologias utilizadas**
 
-    * Utilizar as API’s para consumo dos dados a partir da aplicação que está criada e fazer as seguintes verificações:
-      * Se o cliente e o produto existirem, inserir o registro do billing e billingLines no DB local.
-      * Caso se o cliente existir ou só o produto existir, deve retornar um erro na aplicação informando sobre a criação do registro faltante.
-      * Criar exceptions tratando mal funcionamento ou interrupção de serviço quando API estiver fora.
-* Lista de API’s :
-	* Get https://65c3b12439055e7482c16bca.mockapi.io/api/v1/billing
-	* Get https://65c3b12439055e7482c16bca.mockapi.io/api/v1/billing/:id
-	* Post https://65c3b12439055e7482c16bca.mockapi.io/api/v1/billing
-	* Delete https://65c3b12439055e7482c16bca.mockapi.io/api/v1/billing/:id
-	* PUT https://65c3b12439055e7482c16bca.mockapi.io/api/v1/billing/:id
----------------------
-**Requisitos 💻**
-
-* A aplicação deverá ser desenvolvida usando .NET a partir da versão 5+;
-* Modelagem de dados pode ser no banco de dados de sua preferência, podendo ser um banco relacional ou não relacional (mongodb, SQL Server, PostgreSQL, MySQL, etc);
-* Persistência de dados no banco deverá ser feita utilizando o Entity Framework Core;
-* O retorno da API deverá ser em formato JSON;
-* Utilizar as requisições GET, POST, PUT ou DELETE, conforme a melhor prática;
-* Criar o README do projeto descrevendo as tecnologias utilizadas, chamadas dos serviços e configurações necessário para executar a aplicação.
----------------------
-**Pontos Extras ⭐**
-
-* Desenvolvimento baseado em TDD;
-* Práticas de modelagem de projeto;
-* Criar e configurar o Swagger da API de acordo com as melhores práticas;
-* Criar uma API para extração dos dados de faturamento.
-* Sugestões serão bem vindas.
----------------------
-**Submissão do teste 📝**
-
-Crie um fork do teste para acompanharmos o seu desenvolvimento através dos seus commits.
+* .NET 8.0
+* MediatR
+* EntityFrameworkCore 8.0
+* Postgres
+* XUnit
+* Moq
 
 ---------------------
-Obrigado!
+**Configuração do projeto**
+*Docker compose*
+Há uma configuração de Docker Compose que pode ser iniciada diretamente no visual studio. Essa opção irá configurar o projeto e uma instância do postgres automaticamente.
+Para utilizar essa opção, certifique-se de ter o docker engine rodando e que as portas 8080, 8081 e 5432 estão disponíveis no seu ambiente. Caso não estejam, você pode alterar as portas de saída em: *ca-backend-test\docker-compose.yml*
 
-Agradecemos sua participação no teste. Boa sorte! 😄
+*Diretamente no visual studio*
+Certifique-se de ter uma instância de postgres disponível
+Configure a conexão de acordo com a sua instância de postgres em *\ca-backend-test\NexerAPI\appsettings.json*
+
+
+**Endpoints**
+
+Swagger disponível em /swagger-ui/index.html
+
+*Billing*
+* /api/billing/{id} - Importa uma invoice da API externa para o banco de dados local
+
+*Customer*
+* POST /api/customers - Cria um novo cliente
+* GET /api/customers - Retorna todos os clientes existentes no banco de dados
+* PUT /api/customers/{id} - Atualiza um cliente
+* DELETE /api/customers/{id} - Deleta um cliente
+* GET /api/customers/{id} - Busca um cliente por id
+
+*Product*
+* POST /api/products - Cria um novo produto
+* GET /api/products - Retorna todos os produtos existentes no banco de dados
+* PUT /api/products/{id} - Atualiza um produto
+* DELETE /api/products/{id} - Deleta um produto
+* GET /api/products/{id} - Busca um produto por id
